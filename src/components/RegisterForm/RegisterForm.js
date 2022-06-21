@@ -8,19 +8,30 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useState } from 'react';
+import axios from 'axios';
+import { Password } from '@mui/icons-material';
 
 const theme = createTheme();
+const url = 'localhost:8080/user/register?'
+
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
+  
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-    
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+
+  const handleRegisterSubmit =  async (event) => {
+    event.preventDefault();
+    console.log(username,email,password);
+    try {
+      const resp = await axios.post(url,{mail: email,username: username,password: password})
+      console.log(resp.data);
+    } catch (error) {
+      console.log(error.response);
+    }
   };
 
 
@@ -39,7 +50,7 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" noValidate onSubmit={handleRegisterSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -50,6 +61,8 @@ export default function SignUp() {
                   id="username"
                   label="Username"
                   autoFocus
+                  value={username}
+                  onChange={(event)=> setUsername(event.target.value)}
                 />
               </Grid>
               
@@ -61,6 +74,9 @@ export default function SignUp() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  value={email}
+                  onChange={(event)=> setEmail(event.target.value)}
+
                 />
               </Grid>
               <Grid item xs={12}>
@@ -72,6 +88,9 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  value={password}
+                  onChange={(event)=> setPassword(event.target.value)}
+
                 />
               </Grid>
               
@@ -81,7 +100,7 @@ export default function SignUp() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              onClick={handleSubmit}
+              onClick={handleRegisterSubmit}
             >
               Sign Up
             </Button>

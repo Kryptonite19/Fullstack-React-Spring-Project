@@ -1,19 +1,24 @@
 import { Container } from '@mui/material'
 import React from 'react'
 import PackageTable from '../../components/PackageTable'
-import SubmitPackage from '../../components/SubmitPackage'
+import { Navbar  } from "../../components";
+
 
 
 const Home = () => {
+
+  const divStyle = {
+    marginTop:'2rem',
+    marginLeft: '10rem',
+    marginRight: '10rem',
+
+  };
+
   return (
     <>
-    <Container>
-      <br/>
+    <div style={divStyle}>
     <PackageTable/>
-      <br/>
-    <SubmitPackage/>
-    </Container>
- 
+    </div>
     </>
   )
 }
