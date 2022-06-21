@@ -10,8 +10,9 @@ import java.util.Date;
 @Table(name="package")
 @Setter
 @Getter
-public class Package {
+public class Pkg {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "length")
     private float length;
