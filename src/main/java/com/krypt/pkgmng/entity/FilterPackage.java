@@ -16,10 +16,5 @@ import javax.persistence.Table;
 //@Getter
 
 public class FilterPackage {
-//    @Id
-//    @Column(name = "id", nullable = false)
-//
-//    List<Package> sort(boolean isDesc, String column) {
-//        return Collections.emptyList();
-//    }
+
 }
